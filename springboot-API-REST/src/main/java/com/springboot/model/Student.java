@@ -61,7 +61,13 @@ public class Student {
         this.studentEmail = studentEmail;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
+                ", studentFirstName='" + studentFirstName + '\'' +
+                ", studentEmail='" + studentEmail + '\'' +
+                '}';
+    }
 }

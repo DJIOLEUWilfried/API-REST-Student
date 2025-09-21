@@ -11,9 +11,9 @@ import java.util.List;
 @RequestMapping("api/student")
 public class StudentController {
 
-    private StudentService studentService;
+    private final StudentService studentService;
 
-    @Autowired
+    // @Autowired
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
@@ -21,6 +21,9 @@ public class StudentController {
 
     @PostMapping
     public Student createStudentController(@RequestBody Student student) {
+
+        // System.out.println("\n\n Valeur === " + student);
+
         return this.studentService.createStudent(student);
     }
 
@@ -29,8 +32,9 @@ public class StudentController {
         return this.studentService.updateStudent(id, student) ;
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteStudentController(@PathVariable Long id) {
+        System.out.println("\n\n Nous y sommes " );
         this.studentService.deleteStudent(id);
     }
 
