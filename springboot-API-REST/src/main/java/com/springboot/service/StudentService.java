@@ -15,20 +15,20 @@ public class StudentService {
 
     private final StudentRepository studentRepository ;
 
-
     public StudentService(StudentRepository studentRepository) {
+
         this.studentRepository = studentRepository;
     }
 
-
     public Student createStudent(Student student) {
+
         return this.studentRepository.save(student) ;
     }
 
     public Student updateStudent(Long id, Student student) {
         Optional<Student> studentExist = this.studentRepository.findById(id) ;
 
-        if (studentExist.isEmpty()) {
+        if (!studentExist.isPresent()) {
 
             throw new StudentNotFoundException(String.format("Student with id '%d' not found !", id)) ;
         }
@@ -48,12 +48,20 @@ public class StudentService {
     }
 
 
-    public Student findStudentById(Long id) {
+    public Optional<Student> findStudentById(Long id) {
 
-        return this.studentRepository.findById(id)
-                .orElseThrow(() -> new StudentNotFoundException (
-                        String.format("Student with id '%d' not found !", id)
-                ));
+//        return this.studentRepository.findById(id)
+//                .orElseThrow(() -> new StudentNotFoundException (
+//                        String.format("Student with id '%d' not found !", id)
+//                ));
+        Optional<Student> studentExist = this.studentRepository.findById(id) ;
+
+        if (!studentExist.isPresent()) {
+
+            throw new StudentNotFoundException(String.format("Student with id '%d' not found !", id)) ;
+        }
+
+        return this.studentRepository.findById(id) ;
     }
 
 
